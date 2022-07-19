@@ -1,0 +1,10 @@
+---
+- name: Install Samba Server on CentOS
+  include_tasks: centos_samba.yaml
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: Install Samba Server on Debian
+  include_tasks: debian_samba.yaml
+  when:
+    - ansible_os_family == "Debian"

@@ -1,0 +1,8 @@
+---
+- name: Deploy Samba Server
+  hosts: all 
+  become: true 
+
+  roles:
+#    - { role: samba_roles, when: ansible_os_family == 'RedHat'}
+#    - { role: samba_roles, when: ansible_os_family == 'Debian'}

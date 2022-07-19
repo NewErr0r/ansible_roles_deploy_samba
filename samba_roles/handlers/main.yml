@@ -1,0 +1,37 @@
+---
+- name: Started and Enabled Chronyd
+  service: 
+    name: chronyd 
+    enabled: true 
+    state: started 
+
+- name: Restart Firewalld
+  service: 
+    name: firewalld 
+    state: restarted
+
+- name: Started and Enabled smb
+  service: 
+    name: smb 
+    enabled: true 
+    state: started
+
+- name: Restart smb
+  service: 
+    name: smb 
+    state: restarted
+
+- name: Started and  Enabled nmbd
+  service: 
+    name: nmbd 
+    enabled: true 
+    state: started
+
+- name: Restart nmdb 
+  service: 
+    name: nmbd 
+    state: restarted
+
+    
+
+    

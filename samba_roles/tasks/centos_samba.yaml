@@ -1,0 +1,49 @@
+---
+- name: Install Chrony
+  dnf:
+    name: chrony
+    state: latest
+  notify: 
+    - Started and Enabled Chronyd
+
+- name: Configure Timezone
+  shell: "{{ timezone }}"
+
+- name: Configure Firewalld
+  firewalld:
+    service: samba
+    permanent: yes
+    state: enabled 
+  notify:
+    - Restart Firewalld
+
+- name: Disable SELinux now
+  shell: setenforce 0
+
+- name: Disable SELinux
+  selinux:
+    state: disabled
+
+- name: Install samba
+  dnf: 
+    name: samba
+    state: latest
+  notify: 
+    - Started and Enabled smb
+
+- name: Configure file "smb.conf"
+  template: 
+    src: smb.conf.j2
+    dest: "{{ path_for_smb_conf }}"
+
+- name: Create share folder
+  file:
+    path: "{{ path }}"
+    state: directory
+    mode: '0777'
+  notify: 
+    - Restart smb 
+    
+
+
+  

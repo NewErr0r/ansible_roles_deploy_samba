@@ -1,0 +1,29 @@
+---
+- name: Update apt packages
+  apt: 
+    name: "*"
+    state: latest
+    update_cache: yes
+    force_apt_get: yes 
+
+- name: Install packages for Samba
+  apt: 
+    name: "{{ packages }}"
+    state: latest
+    update_cache: yes
+  notify: 
+    - Started and  Enabled nmbd
+
+- name: Configure file "smb.conf"
+  template: 
+    src: smb.conf.j2
+    dest: "{{ path_for_smb_conf }}"
+
+- name: Create share folder
+  file:
+    path: "{{ path }}"
+    state: directory
+    mode: '0777'
+  notify: 
+    - Restart nmdb 
+    

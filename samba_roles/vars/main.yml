@@ -1,0 +1,7 @@
+---
+path_for_smb_conf: /etc/samba/smb.conf
+
+packages: 
+  - samba 
+  - smbclient 
+  - cifs-utils
